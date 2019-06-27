@@ -20,8 +20,10 @@
     <Content Include="angular.json" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
+    <Content Include="src\app\maps-projection\country-carbon.ts" />
     <Content Include="src\app\maps-projection\maps-projection.component.css" />
     <Content Include="src\app\maps-projection\maps-projection.component.html" />
+    <Content Include="src\app\maps-projection\world-map.ts" />
     <Content Include="tsconfig.app.json" />
     <None Include="tsconfig.json" />
     <Content Include="tsconfig.spec.json" />
@@ -61,6 +63,8 @@
     <TypeScriptCompile Include="src\app\data.service.ts" />
     <TypeScriptCompile Include="src\app\maps-projection\maps-projection.component.spec.ts" />
     <TypeScriptCompile Include="src\app\maps-projection\maps-projection.component.ts" />
+    <TypeScriptCompile Include="src\app\maps-projection\maps-projection.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\maps-projection\maps-projection.service.ts" />
     <TypeScriptCompile Include="src\app\material\material.module.ts" />
     <TypeScriptCompile Include="src\app\shared\shared.module.ts" />
   </ItemGroup>

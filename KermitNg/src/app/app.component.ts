@@ -6,10 +6,10 @@ import { Component  } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'KermitNg';
+  title = 'Carbon Emissions';
   options = {
     position: ['bottom', 'right'],
-    timeout: 3000,
+    timeOut: 3000,
     showProgressBar: true,
     lastOnBottom: true,
     pauseOnHover:true
