@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "KermitNg", "KermitNg\KermitNg.njsproj", "{2956D4EA-2060-48BB-8825-F1461625E486}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2956D4EA-2060-48BB-8825-F1461625E486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2956D4EA-2060-48BB-8825-F1461625E486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2956D4EA-2060-48BB-8825-F1461625E486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2956D4EA-2060-48BB-8825-F1461625E486}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98841618-9CB8-43C9-8E3C-790025E07567}
+	EndGlobalSection
+EndGlobal
