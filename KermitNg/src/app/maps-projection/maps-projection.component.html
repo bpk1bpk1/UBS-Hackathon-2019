@@ -69,23 +69,23 @@
             </div>
           </mat-card-content>
         </mat-card>
-        <mat-card>
-          <mat-card-title>one</mat-card-title>
+        <mat-card [hidden]="isHidden">
+          <mat-card-title>Top 10</mat-card-title>
           <mat-card-content>
-            <app-map-projection [data]="currentData"></app-map-projection>
+            <app-map-projection></app-map-projection>
           </mat-card-content>
         </mat-card>
       </div>
       <div class="col-5">
         <ejs-maps id='maps' #maps style="display:block;" [zoomSettings]='zoomSettings' [legendSettings]="legendSettings" [titleSettings]="titleSettings"
-                  (load)="load($event)" (tooltipRender)="tooltipRender($event)" *ngIf="isVisible">
+                  (load)="load($event)" (tooltipRender)="tooltipRender($event)" >
           <e-layers>
             <e-layer [shapeData]='layer.shapeData' [shapePropertyPath]='layer.shapePropertyPath' [shapeDataPath]='layer.shapeDataPath' [dataSource]='dataSource' [tooltipSettings]="layer.tooltipSettings" [shapeSettings]="shapeSettings"></e-layer>
           </e-layers>
         </ejs-maps>
       </div>
       <div class="col-1">
-        <mat-slider [min]="minYear" [max]="maxYear" step="1" (input)="changeSelectedYear($event)" [value]="selectedYear" vertical></mat-slider>{{selectedYear}}
+        <mat-slider [min]="minYear" [max]="maxYear" step="1" (input)="changeSelectedYear($event)" [value]="selectedYear" vertical></mat-slider>
       </div>
       </div>
     </div>

@@ -26,6 +26,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.9.0",
     "@fortawesome/free-regular-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@syncfusion/ej2-angular-heatmap": "^17.1.47",
     "@syncfusion/ej2-angular-maps": "^17.1.51",
     "@syncfusion/ej2-dropdowns": "^17.1.49",
     "angular-in-memory-web-api": "^0.8.0",

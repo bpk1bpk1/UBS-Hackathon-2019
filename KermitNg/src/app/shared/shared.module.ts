@@ -10,6 +10,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 import { faTrash, faCalculator } from '@fortawesome/free-solid-svg-icons'
 
+import { HeatMapModule } from '@syncfusion/ej2-angular-heatmap'
+
 @NgModule({
   declarations: [],
   imports: [
@@ -20,7 +22,8 @@ import { faTrash, faCalculator } from '@fortawesome/free-solid-svg-icons'
     ReactiveFormsModule,
     MapsModule,
     BrowserAnimationsModule,
-    FontAwesomeModule]
+    FontAwesomeModule,
+    HeatMapModule]
 
 })
 export class SharedModule {

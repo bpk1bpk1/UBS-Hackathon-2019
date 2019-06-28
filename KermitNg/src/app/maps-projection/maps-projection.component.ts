@@ -41,8 +41,8 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
     fill: '',
     colorValuePath:''
   };
-  isVisible = true;
-  // custom code start
+  isHidden = true;
+
   public load = (args: ILoadEventArgs) => {
     let theme: string = location.hash.split('/')[1];
     theme = theme ? theme : 'Material';
@@ -51,9 +51,10 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
   }
   // custom code end
   public zoomSettings: object = {
-    enable: false
-  };
-
+    enable: true,
+    toolbars: ['Zoom', 'ZoomIn', 'ZoomOut', 'Pan', 'Reset'],
+    pinchZooming: true
+  }
   public legendSettings: Object = {
     position: 'Bottom',
     width: '400px',
@@ -61,7 +62,6 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
     mode: "Interactive"
   };
 
-  private getSelectedYear= () => this.selectedYear;
 
   titleSettings={
     text: this.selectedYear.toString(),
@@ -73,7 +73,7 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
   public changeSelectedYear = (args) => {
     this.selectedYear = args.value;
     this.dataSource = this.mapsProjectionService.getTotalCarbonByCountry(this.selectedYear);
-    this.titleSettings.text = this.selectedYear.toString();
+    this.maps.titleSettings.text = this.selectedYear.toString();
     this.shapeSettings = {
       fill: '#E5E5E5',
       colorMapping: this.mapsProjectionService.getColorForCountries(),
@@ -88,10 +88,16 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
     }
   };
   public calculate = (): void => {
-    if (this.portfolio.length===0) {
+    if ((this.country.value || '') === '') {
+      this.notificationsService.error("Please select a country");
+      return;
+    }
+    if (this.portfolio.length === 0) {
       this.notificationsService.error("Please create a portfolio");
       return;
     }
+    this.isHidden = false;
+    this.mapsProjectionService.getBaseline(this.country.value);
   }
   public add = (): void => {
     if ((this.product.value || '') === '') {
@@ -152,7 +158,7 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
       colorMapping: this.mapsProjectionService.getColorForCountries(),
       colorValuePath: 'value'
     };
-    console.log('maps', this.maps);
+
   }
 
 }
