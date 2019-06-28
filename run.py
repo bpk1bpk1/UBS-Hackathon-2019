@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 # An object that it is going to be used to send the frontend a json object with country and the carbon emissions by year
 class PresentData:
@@ -48,3 +49,30 @@ def loading_json_object(df):
 
 dataframe = reading_present_dataset()
 currentJsonData = loading_json_object(dataframe)
+dataframe = reading_present_dataset()
+currentJsonData = loading_json_object(dataframe)
+string = ','
+# Writing the country objects to a json file from the present data set.
+with open('currentData.json', 'w') as json_file:
+    json_file.write('[')
+    for data in currentJsonData:
+        json_file.write(',')
+        json.dump(data.__dict__, json_file)
+    json_file.write(']')
+
+# Model Building for Carbon Emissions  [Predictive Analysis for features to put into the next model]
+country = ['China', 'United States', 'India', 'Indonesia', 'Russia', 'Brazil', 'Japan', 'Canada', 'Germany', 'South Korea']
+gas_emissions = pd.read_csv('f-gas-emissions.csv')
+coal_emissions = pd.read_csv('f-coal-emissions.csv')
+hydropower_consumption = pd.read_csv('f-hydropower-consumption.csv')
+oil_consumption = pd.read_csv('f-oil-consumptions.csv')
+solarpower_consumption = pd.read_csv('f-solarpower-consumptions.csv')
+dataframe_model = pd.DataFrame()
+dataframe_model['Year'] = list(dataframe['Year'])
+dataframe_model['Gas Emissions'] = gas_emissions['United States']
+dataframe_model['Coal Emissions'] = coal_emissions['United.States']
+dataframe_model['Hydropower'] = hydropower_consumption['United.States']
+dataframe_model['Solarpower'] = solarpower_consumption['United.States']
+dataframe_model['Oil Power'] = oil_consumption['United.States']
+dataframe_model['Result'] = list(dataframe['United States'])
+dataframe_model.set_index('Year', inplace=True)
