@@ -1,7 +1,7 @@
 <form>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-7">
+      <div class="col-6">
         <mat-card>
           <mat-card-content>
             <div class="row">
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-7">
+              <div class="col-5">
                 <mat-form-field>
                   <mat-label>Product</mat-label>
                   <mat-select [formControl]="product">
@@ -29,8 +29,20 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
+
               </div>
-              <div class="col-4">
+              <div class="col-3">
+                <mat-form-field>
+                  <mat-label>Year</mat-label>
+                  <mat-select [formControl]="year">
+                    <mat-option *ngFor="let year of years" [value]="year">
+                      {{year}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+              <div class="col-3">
                 <mat-form-field>
                   <mat-label>Investment Value</mat-label>
                   <input matInput [formControl]="investmentValue" type="number" />
@@ -49,7 +61,7 @@
                 {{row.year}}
               </div>
               <div class="col-3">
-                {{row.investmentValue | currency:'USD':'symbol':'1.0-0'}}(mil)
+                {{row.investmentValue}}
               </div>
               <div class="col-1">
                 <a class="btn btn-danger" (click)="remove(i)"><fa-icon [icon]="['fas','trash']"></fa-icon></a>
@@ -64,7 +76,7 @@
           </mat-card-content>
         </mat-card>
       </div>
-      <div class="col-4">
+      <div class="col-5">
         <ejs-maps id='maps' #maps style="display:block;" [zoomSettings]='zoomSettings' [legendSettings]="legendSettings" [titleSettings]="titleSettings"
                   (load)="load($event)" (tooltipRender)="tooltipRender($event)" >
           <e-layers>

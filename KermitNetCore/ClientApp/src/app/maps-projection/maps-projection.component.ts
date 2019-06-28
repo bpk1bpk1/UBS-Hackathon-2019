@@ -26,6 +26,7 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
   colorsByCountry = [];
   countries = [];
   products = ["Coal","Natural Gas","Oil","Solar","Hydro","Meat Industry"];
+  years = new Array<number>();
   country = new FormControl();
   investmentValue = new FormControl();
   portfolio = [];
@@ -34,6 +35,7 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
   selectedYear = (new Date()).getFullYear() - 1;
   maxYear = this.selectedYear;
   minYear = this.maxYear-50;
+  year = new FormControl();
   dataSource = [];
   shapeData = [];
   shapeSettings = {
@@ -98,20 +100,23 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
     }
     this.isHidden = false;
     this.mapsProjectionService.getBaseline(this.country.value);
-    this.mapsProjectionService.getInvested(this.country.value);
-    this.mapsProjectionService.getPortfolio(this.country.value, this.portfolio);
   }
   public add = (): void => {
     if ((this.product.value || '') === '') {
       this.notificationsService.error("Please select a product");
       return;
     }
+    if ((this.year.value || '') === '') {
+      this.notificationsService.error("Please select a year");
+      return;
+    }
     if ((this.investmentValue.value || '') === '') {
       this.notificationsService.error("Please select an investment value");
       return;
     }
-    this.portfolio.push({ product: this.product.value, investmentValue: this.investmentValue.value });
+    this.portfolio.push({ product: this.product.value, year: this.year.value, investmentValue: this.investmentValue.value });
     this.product.setValue('');
+    this.year.setValue('');
     this.investmentValue.setValue('');
   }
 
@@ -146,6 +151,8 @@ export class MapsProjectionComponent implements OnInit, OnDestroy{
   };
   ngOnInit(): void {
     this.countries = this.mapsProjectionService.getCountries();
+    var year = (new Date()).getFullYear();
+    for (var i = 0; i < 50; this.years.push(year + (i++)));
     this.dataSource = this.mapsProjectionService.getTotalCarbonByCountry(this.selectedYear);
     this.shapeSettings = {
       fill: '#E5E5E5',

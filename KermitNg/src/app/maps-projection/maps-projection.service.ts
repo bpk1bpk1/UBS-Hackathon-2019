@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { data as totalCarbonByCountry}  from './total-country-carbon'
 import { data as worldMap } from './world-map'
-import { data as currentCountryCarbon } from './current-country-carbon'
+import { data as currentCountryCarbon, dataInvested as currentCountryCarbonInvested, dataInvestedRed, dataInvestedGreen } from './current-country-carbon'
 import { Subject } from 'rxjs';
 import { isArray } from 'util';
 @Injectable({
@@ -12,11 +11,11 @@ export class MapsProjectionService {
 
   // Observable string sources
   private baselineAnnouncedSource = new Subject<any>();
-  private baselineConfirmedSource = new Subject<any>();
+  private investedAnnouncedSource = new Subject<any>();
 
   // Observable string streams
   baselineAnnounced$ = this.baselineAnnouncedSource.asObservable();
-  baselineConfirmed$ = this.baselineConfirmedSource.asObservable();
+  investedAnnounced$ = this.investedAnnouncedSource.asObservable();
 
   // Service message commands
   announceBaseline(baseline: any) {
@@ -24,19 +23,22 @@ export class MapsProjectionService {
     this.baselineAnnouncedSource.next(baseline);
   }
 
-  confirmBaseline(baseline: any) {
-    this.baselineConfirmedSource.next(baseline);
+  announceInvested(invested: any) {
+    console.log('investedAnnounced$', invested);
+    this.investedAnnouncedSource.next(invested);
   }
 
 
   getYears(): string[] {
     let years = [];
-    for (var i = 2019; i <= 2029; years.push(i++));
+    for (var i = 2019; i <= 2048; years.push(i++));
     return years;
   }
 
   getCountries(): string[] {
-    return currentCountryCarbon.map(item => item.country);
+    let result = currentCountryCarbon.filter(t => t.country !== 'United States').map(item => item.country);
+    result.splice(0, 1,'United States')
+    return result;
   }
 
   getTopCountries(country: string,top:number): string[] {
@@ -60,16 +62,47 @@ export class MapsProjectionService {
     return data;
   }
 
-  getPortfolio(portfolio: any): any {
-    var data = currentCountryCarbon.map(t => {
-      return { 'country': t.country, 'value': t.yearCarbonEmissions[2018] };
-    });
-    return data;
+  getPortfolio(country: string, portfolio: any): any {
+    var data = [];
+
+    let selected = portfolio.map(t => t.product);
+    let isCoal = selected.includes("Coal");
+    let isNaturalGas = selected.includes("Natural Gas");
+    let isOil = selected.includes("Oil");
+    let isSolar = selected.includes("Solar");
+    let isHydro = selected.includes("Hydro");
+    let isMeatIndustry = selected.includes("Meat Industry");
+
+    if (isCoal && isNaturalGas && isOil && isSolar && isHydro && isMeatIndustry) {
+      data = currentCountryCarbonInvested.filter(t => t.country === country);
+      console.log("all");
+    } else {
+      if (isCoal && isNaturalGas && isOil && !isSolar && !isHydro && !isMeatIndustry) {
+        data = dataInvestedRed.filter(t => t.country === country);
+        console.log("red");
+      } else {
+        if (isSolar && isHydro && !isCoal && !isNaturalGas && !isOil && !isMeatIndustry) {
+          data = dataInvestedGreen.filter(t => t.country === country);
+          console.log("green");
+        } else {
+          data = currentCountryCarbon.filter(t => t.country === country);
+          console.log("default");
+        }
+      }
+    }
+    console.log("isCoal", isCoal);
+    let invested = { country: country, data: data };
+    this.announceInvested(invested);
   }
 
-  getBaseline(country:string): any {
-    var data = currentCountryCarbon.sort((a, b) => a.yearCarbonEmissions[2018] - b.yearCarbonEmissions[2018]);
-    this.announceBaseline({country:country,data:data});
+  getBaseline(country: string): any {
+    var data = currentCountryCarbon.filter(t => t.country === country).sort((a, b) => a.yearCarbonEmissions[2018] - b.yearCarbonEmissions[2018]);
+    this.announceBaseline({ country: country, data: data });
+  }
+  
+  getInvested(country: string): any {
+    var data = currentCountryCarbonInvested.filter(t => t.country === country).sort((a, b) => a.yearCarbonEmissions[2018] - b.yearCarbonEmissions[2018]);
+    this.announceInvested({ country: country, data: data });
   }
 
   getCurrentCountryCarbon(): any {

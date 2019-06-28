@@ -33,6 +33,7 @@
     <Content Include="tsconfig.spec.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
+    <None Include="UbsKermitNg - Web Deploy.pubxml" />
     <None Include="e2e\tsconfig.json" />
     <Content Include="src\index.html" />
     <Content Include="src\styles.css" />

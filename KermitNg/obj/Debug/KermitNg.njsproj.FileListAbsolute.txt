@@ -1,0 +1,2 @@
+C:\Users\sbara\source\repos\UbsHackathon\2019-AMER-KermitTheFrog-GreenInvesting\KermitNg\obj\Debug\KermitNg.njsproj.CoreCompileInputs.cache
+C:\Users\sbara\source\repos\UbsHackathon\2019-AMER-KermitTheFrog-GreenInvesting\KermitNg\bin\Microsoft.NodejsTools.WebRole.dll
