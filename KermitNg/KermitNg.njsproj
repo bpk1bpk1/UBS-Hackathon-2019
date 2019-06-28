@@ -13,6 +13,8 @@
     <EnableTypeScript>true</EnableTypeScript>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -20,12 +22,14 @@
     <Content Include="angular.json" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
-    <Content Include="src\app\maps-projection\country-carbon.ts" />
+    <Content Include="src\app\map-projection\map-projection.component.css" />
+    <Content Include="src\app\map-projection\map-projection.component.html" />
+    <Content Include="src\app\maps-projection\total-country-carbon.ts" />
     <Content Include="src\app\maps-projection\maps-projection.component.css" />
     <Content Include="src\app\maps-projection\maps-projection.component.html" />
     <Content Include="src\app\maps-projection\world-map.ts" />
     <Content Include="tsconfig.app.json" />
-    <None Include="tsconfig.json" />
+    <Content Include="tsconfig.json" />
     <Content Include="tsconfig.spec.json" />
     <Content Include="tslint.json" />
     <Content Include="README.md" />
@@ -52,6 +56,7 @@
     <Folder Include="e2e\src" />
     <Folder Include="src" />
     <Folder Include="src\app" />
+    <Folder Include="src\app\map-projection\" />
     <Folder Include="src\app\maps-projection\" />
     <Folder Include="src\app\material\" />
     <Folder Include="src\app\shared\" />
@@ -61,6 +66,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app\data.service.spec.ts" />
     <TypeScriptCompile Include="src\app\data.service.ts" />
+    <TypeScriptCompile Include="src\app\map-projection\map-projection.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\map-projection\map-projection.component.ts" />
+    <TypeScriptCompile Include="src\app\maps-projection\current-country-carbon.ts" />
     <TypeScriptCompile Include="src\app\maps-projection\maps-projection.component.spec.ts" />
     <TypeScriptCompile Include="src\app\maps-projection\maps-projection.component.ts" />
     <TypeScriptCompile Include="src\app\maps-projection\maps-projection.service.spec.ts" />

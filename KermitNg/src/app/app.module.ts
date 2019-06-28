@@ -13,12 +13,14 @@ import { environment } from '../environments/environment.prod';
 import { DataService } from './data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { MapProjectionComponent } from './map-projection/map-projection.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapsProjectionComponent
+    MapsProjectionComponent,
+    MapProjectionComponent
   ],
   imports: [
     BrowserModule,

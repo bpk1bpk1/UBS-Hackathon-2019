@@ -1,41 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { data as carbonByCountry}  from './country-carbon'
+import { data as totalCarbonByCountry}  from './total-country-carbon'
 import { data as worldMap } from './world-map'
+import { data as currentCountryCarbon } from './current-country-carbon'
 @Injectable({
   providedIn: 'root'
 })
 export class MapsProjectionService {
   getCountries(): string[] {
-    console.log(carbonByCountry.map(item => item.Country));
-    return carbonByCountry.map(item => item.Country);
+    return currentCountryCarbon.map(item => item.country);
   }
-  getCarbonByCountry(): any {
-    return carbonByCountry;
+  getTotalCarbonByCountry(year: number): any {
+    if (year === null) {
+      year = (new Date()).getFullYear()-1;
+    }
+    var data = currentCountryCarbon.map(t => {
+      return { 'country': t.country, 'value': t.yearCarbonEmissions[year] };
+    });
+    console.log('data',data);
+    return data;
   }
+
+  getCurrentCountryCarbon(): any {
+    return currentCountryCarbon;
+  }
+
   getWorldMap(): any {
     return worldMap;
   }
   getColorForCountries(): any {
     return [{
-      from: 0, to: 1000, color: '#AFD100', label: '<1k'
-    },
-    { from: 1000, to: 2000, color: '#C3D000', label: '1k-2k' }, {
-      from: 2000, to: 3000, color: '#CFC700', label: '2k-3k'
+      from: 0, to: 5, color: '#AFD100', label: '<10'
     }, {
-      from: 3000, to: 4000, color: '#CEB100', label: '3k-4k'
+      from: 5, to: 10, color: '#CFC700', label: '10-20'
+    }, {
+      from: 10, to: 15, color: '#CEB100', label: '20-30'
     },
     {
-      from: 4000, to: 6000, color: '#CEB100', label: '4k-6k'
+      from: 15, to: 20, color: '#CA7100', label: '15-20'
     },
     {
-      from: 6000, to: 9000, color: '#CA7100', label: '6k-9k'
+      from: 20, to: 40, color: '#C63300', label: '40-60'
     },
     {
-      from: 9000, to: 12000, color: '#C63300', label: '9k-12k'
-    },
-    {
-      from: 10000, to: 100000, color: '#C20007', label: '12k-20k'
+      from: 40, to: 100, color: '#C20007', label: '60-100'
     }
     ];
   }
